@@ -10,6 +10,10 @@
   background: inherit;
 }
 
+.mat-nav-list{
+  font-size: 0.22em;
+}
+
 .mat-toolbar.mat-primary {
   position: sticky;
   top: 0;
@@ -18,4 +22,12 @@
 
 .example-spacer {
   flex: 1 1 auto;
+}
+
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 48
 }

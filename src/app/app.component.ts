@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from './core/services/auth.service';
-
+import { OAuthService } from 'angular-oauth2-oidc';
+import { oauth2OidcConfig } from 'src/config/oauth2oidc.config';
 
 @Component({
   selector: 'app-root',
@@ -10,15 +10,13 @@ import { AuthService } from './core/services/auth.service';
 export class AppComponent implements OnInit{
   
   title = 'sgth-frontend';
-  isUserAuthenticated = false;
 
-  constructor(private authService:AuthService){}
+  constructor(private authService:OAuthService){}
 
   ngOnInit(): void {
-
-    this.isUserAuthenticated = this.authService.isAuthenticated;
-  
+    this.authService.configure(oauth2OidcConfig);
+    this.authService.setupAutomaticSilentRefresh();
+    this.authService.loadDiscoveryDocumentAndLogin();
   }
-
 }
 

@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  oauthServer: 'https://api.storerestapi.com'
+  
 };
 
 /*

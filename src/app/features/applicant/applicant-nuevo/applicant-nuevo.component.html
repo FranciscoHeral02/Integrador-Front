@@ -1,0 +1,183 @@
+<div class="grid-container">
+    <h3 class="mat-h3">Nuevo Postulante</h3>
+    <mat-grid-list cols="2" rowHeight="800">
+      <mat-grid-tile [colspan]="2" [rowspan]="1">
+        <mat-card class="dashboard-card">
+          <mat-card-header>
+            <mat-card-title>
+              <button mat-icon-button class="more-button" [matMenuTriggerFor]="menu" aria-label="Toggle menu">
+                <mat-icon>more_vert</mat-icon>
+              </button>
+              <mat-menu #menu="matMenu" xPosition="before">
+                <button mat-menu-item>Expand</button>
+                <button mat-menu-item>Remove</button>
+              </mat-menu>
+            </mat-card-title>
+          </mat-card-header>
+          <mat-card-content class="dashboard-card-content">
+
+            <form class="container" #applicant="ngForm" (ngSubmit)="saveApplicant(applicant)">
+              <mat-divider style="margin-top:10px"></mat-divider>
+              <h3 mat-subheader>Datos Personales</h3>
+
+              <input name="employeeId" type="hidden" [(ngModel)]="employeeId">
+
+              <div class="row">
+                <div class="col-md-3">
+                  <mat-form-field appearance="standard">
+                    <mat-label>Nombres</mat-label>
+                    <input matInput  name="nombre" [(ngModel)]="nombre">
+                  </mat-form-field>
+                </div>
+                <div class="col-md-3">
+                  <mat-form-field appearance="standard">
+                    <mat-label>Apellidos</mat-label>
+                    <input matInput name="apellidos" [(ngModel)]="apellidos">
+                  </mat-form-field>            
+                </div>
+                <div class="col-md-3">
+                  <mat-form-field appearance="standard">
+                    <mat-label>Direccion</mat-label>
+                    <input matInput name="direccion" [(ngModel)]="direccion">
+                  </mat-form-field>            
+                </div>
+                <div class="col-md-3">
+                  <mat-form-field appearance="standard">
+                    <mat-label>DNI</mat-label>
+                    <input matInput name="dni" [(ngModel)]="dni">
+                  </mat-form-field>            
+                </div>
+              </div>
+
+              <div class="row">
+              
+                <div class="col-md-3">
+                  <mat-form-field appearance="standard">
+                    <mat-label>Telefono</mat-label>
+                    <input matInput name="telefono" [(ngModel)]="telefono">
+                  </mat-form-field>
+                </div>
+                <div class="col-md-3">
+                  <mat-form-field appearance="standard">
+                    <mat-label>Celular</mat-label>
+                    <input matInput name="celular" [(ngModel)]="celular">
+                  </mat-form-field>
+                </div>
+                <div class="col-md-3">
+                  <mat-form-field appearance="standard">
+                    <mat-label>E-Mail</mat-label>
+                    <input matInput name="email" type="email" [(ngModel)]="email">
+                  </mat-form-field>
+                </div>
+                <div class="col-md-3">
+                  <mat-form-field appearance="standard" >
+                    <mat-label>Fecha Nacimiento</mat-label>
+                    <input matInput [matDatepicker]="picker" name="fechaNacimiento" [(ngModel)]="fechaNacimiento">
+                    <mat-hint>DD/MM/YYYY</mat-hint>
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                  </mat-form-field>
+                </div>
+
+              </div>
+              <mat-divider></mat-divider>
+              <h5 mat-subheader>Lugar de nacimiento</h5>
+              <div class="row">
+                <div class="col-md-4">
+                  <mat-form-field appearance="standard">
+                    <mat-label>Departamento</mat-label>
+                    <mat-select [(ngModel)]="codDepartamento" name="dep"
+                    (selectionChange)="getProvincias($event.value)">
+                      <mat-option *ngFor="let dep of depList" [value]="dep.codigoDep">
+                        {{dep.nombreDep}}
+                      </mat-option>
+                    </mat-select>
+                 </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                  <mat-form-field appearance="standard">
+                    <mat-label>Provincia</mat-label>
+                    <mat-select [ngModel]="codProvincia" name="prov"
+                    (selectionChange)="getDistritos($event.value,codDepartamento)">
+                      <mat-option *ngFor="let prov of provList" [value]="prov.codigoProv">
+                        {{prov.nombreProv}}
+                      </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                  <mat-form-field appearance="standard">
+                    <mat-label>Distrito</mat-label>
+                    <mat-select ngModel name="lugarNacimiento">
+                      <mat-option *ngFor="let dist of distList" [value]="dist.idUbigeo">
+                        {{dist.nombreDist}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+
+              </div>
+              <mat-divider></mat-divider>
+              <h3 mat-subheader>Datos de antiguo empleo</h3>
+              <div class="row">
+                <div class="col-md-4">
+                  <mat-form-field appearance="standard">
+                    <mat-label>Empresa Anterior</mat-label>
+                    <input matInput  name="empresaAnterior" [(ngModel)]="empresaAnterior">
+                  </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                  <mat-form-field appearance="standard">
+                    <mat-label>Años de trabajo</mat-label>
+                    <input matInput name="aniosServicio" type="number" [(ngModel)]="aniosServicio">
+                  </mat-form-field>            
+                </div>
+                <div class="col-md-4">
+                  <mat-form-field appearance="standard">
+                    <mat-label>Puesto Anterior</mat-label>
+                    <input matInput name="puestoAnterior" [(ngModel)]="puestoAnterior">
+                  </mat-form-field>            
+                </div>
+              </div>
+
+              <mat-divider></mat-divider>
+              <h3 mat-subheader>Datos Nuevo Empleo</h3>
+              <div class="row">
+                <div class="col-md-3">
+                  <mat-form-field appearance="standard">
+                    <mat-label>Perfil</mat-label>
+                    <input matInput  name="perfil" [(ngModel)]="perfil">
+                  </mat-form-field>
+                </div>
+                <div class="col-md-3">
+                  <mat-form-field appearance="standard">
+                    <mat-label>Puesto</mat-label>
+                    <input matInput name="puestoPostulacion"  [(ngModel)]="puestoPostulacion">
+                  </mat-form-field>            
+                </div>
+                <div class="col-md-3">
+                  <mat-form-field appearance="standard">
+                    <mat-label>Aspiracion Salarial</mat-label>
+                    <input matInput name="aspiracionSalarial" [(ngModel)]="aspiracionSalarial">
+                  </mat-form-field>            
+                </div>
+                <div class="col-md-3">
+                  <mat-form-field appearance="standard">
+                    <mat-label>Disponibilidad</mat-label>
+                    <mat-select  name="disponibilidad" [(ngModel)]="disponibilidad">
+                      <mat-option  value="inmediato">Inmediata</mat-option>
+                      <mat-option  value="diferido">Diferido</mat-option>
+                    </mat-select>
+                </mat-form-field>           
+                </div>
+              </div>
+         
+              
+              <button mat-raised-button type="submit" color="primary">Guardar</button>
+            
+            </form>
+          </mat-card-content>
+        </mat-card>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </div>
