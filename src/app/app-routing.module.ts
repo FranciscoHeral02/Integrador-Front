@@ -15,13 +15,17 @@ const routes: Routes = [
     loadChildren: () => import('./features/employees/employees.module').then(m => m.EmployeesModule)
   },
   {
+    path: 'settings',
+    loadChildren: () => import('./features/settings/settings.module').then(m => m.SettingsModule)
+  },
+  {
     path: '',
     redirectTo: 'dashboard',
     pathMatch: 'full'
   }
 ]
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes)],  
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

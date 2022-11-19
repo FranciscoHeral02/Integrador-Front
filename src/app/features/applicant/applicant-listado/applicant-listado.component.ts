@@ -13,9 +13,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class ApplicantListadoComponent implements OnInit,AfterViewInit {
 
   public applicantList:any;
-  public displayedColumns: string[] = ['dni','nombre', 'apellido', 'celular', 'puestoPostulacion','edit','delete'];
+  public displayedColumns: string[] = ['dni','nombre', 'apellido', 'celular', 'puestoPostulacion','interview','edit','delete'];
 
-  public dataSource:any ;
+  public dataSource:any = new MatTableDataSource() ;
 
   //@ViewChild(MatPaginator,{ static: false }) paginator!: MatPaginator;
   
@@ -40,7 +40,6 @@ export class ApplicantListadoComponent implements OnInit,AfterViewInit {
   public getAllApplicants(){
     this.applicantService.getAllApplicants().subscribe({
       next: (res) => {
-        this.dataSource = new MatTableDataSource();
         this.dataSource.data= res;
       }, 
       error: (err) => {
@@ -67,5 +66,9 @@ export class ApplicantListadoComponent implements OnInit,AfterViewInit {
 
   public edit(idEmployee:String){
     this.router.navigate(['applicant','nuevo'],{queryParams:{'idEmployee':idEmployee}})
+  }
+
+  public interview(idEmployee:String){
+    this.router.navigate(['applicant','interview'],{queryParams:{'idEmployee':idEmployee}})
   }
 }

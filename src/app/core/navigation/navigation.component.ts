@@ -28,8 +28,7 @@ export class NavigationComponent implements OnInit {
       name: 'Postulantes',
       icon:'person_add',
       route:'/applicant',
-      children: [{name: 'Listado',icon:'list',route:'/listado'}, 
-                 {name: 'Nuevo',icon:'add_box',route:'/nuevo'}],
+      children: [{name: 'Listado',icon:'list',route:'/listado'}],
     },
     {
       name: 'Empleados',

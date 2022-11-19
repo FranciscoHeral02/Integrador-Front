@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Applicant } from '../interfaces/applicant';
 
 @Injectable()
 export class ApplicantService {
@@ -8,12 +9,26 @@ export class ApplicantService {
 
   constructor(private http: HttpClient) { }
 
-  public saveApplicant(data:any){
-     return this.http.post(this.urlBase,data);
+  public saveApplicant(data:any,file:any){
+
+    const formData = new FormData;
+    formData.append('data',new Blob([JSON.stringify(data)],{
+      type: "application/json"
+    }));
+    formData.append('file',file)
+
+    return this.http.post(this.urlBase,formData);
+
   }
 
-  public updateApplicant(data:any){
-    return this.http.put(this.urlBase,data);
+  public updateApplicant(data:any,file:any){
+    const formData = new FormData;
+    formData.append('data',new Blob([JSON.stringify(data)],{
+      type: "application/json"
+    }));
+    formData.append('file',file)
+
+    return this.http.put(this.urlBase,formData);
   }
 
   public getAllApplicants(){
@@ -21,7 +36,7 @@ export class ApplicantService {
   }
 
   public getApplicant(idApplicant:String){
-     return this.http.get(this.urlBase+"/"+idApplicant);
+     return this.http.get<Applicant>(this.urlBase+"/"+idApplicant);
   }
 
   public deleteApplicant(idApplicant:String){

@@ -1,0 +1,49 @@
+<div class="grid-container">
+    <mat-grid-list cols="2" rowHeight="50vh">
+      <mat-grid-tile rowspan="2">
+        <mat-card class="pdf-card">
+          <mat-card-header>
+            <mat-card-title>
+              Evaluación Tecnica
+              <button mat-icon-button class="more-button" [matMenuTriggerFor]="menu" aria-label="Toggle menu">
+                <mat-icon>more_vert</mat-icon>
+              </button>
+              <mat-menu #menu="matMenu" xPosition="before">
+                <button mat-menu-item>Guardar</button>
+              </mat-menu>
+            </mat-card-title>
+          </mat-card-header>
+        </mat-card>
+      </mat-grid-tile>
+      
+      <mat-grid-tile rowspan="2">
+        <mat-card class="pdf-card">
+          <mat-card-header>
+            <mat-card-title>
+              <mat-menu #menu="matMenu" xPosition="before">
+                <button mat-menu-item>Expand</button>
+                <button mat-menu-item>Remove</button>
+              </mat-menu>
+            </mat-card-title>
+          </mat-card-header>
+          <mat-card-content class="dashboard-card-content">
+            <div>
+                <ngx-extended-pdf-viewer
+                    [base64Src]="base64"
+                    backgroundColor="#ffffff"
+                    [height]="'90vh'"
+                    [useBrowserLocale]="true"
+                    [handTool]="false"
+                    [showHandToolButton]="true"
+                    >
+                </ngx-extended-pdf-viewer>
+              
+           </div>
+          </mat-card-content>
+          
+        </mat-card>
+      </mat-grid-tile>
+
+    </mat-grid-list>
+  </div>
+

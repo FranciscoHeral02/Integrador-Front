@@ -1,0 +1,74 @@
+<div class="grid-container">
+    <mat-card class="dashboard-card">
+        <mat-card-header>
+            <mat-card-title>
+              <button mat-button color="primary" class="add-button" (click)="openDialog(false)">
+                <mat-icon>note_add</mat-icon>Nuevo Registro
+              </button>
+            </mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="dashboard-card-content">
+            <div class="table-responsive">
+                <table mat-table  class="mat-elevation-z8" [dataSource]="dataSource">
+              
+                  <!-- Position Column -->
+                  <ng-container matColumnDef="nombreCampus">
+                    <th mat-header-cell *matHeaderCellDef> Nombre Campus </th>
+                    <td mat-cell *matCellDef="let element"> {{element.nombreCampus}} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="razonSocial">
+                    <th mat-header-cell *matHeaderCellDef> Razon Social</th>
+                    <td mat-cell *matCellDef="let element"> {{element.razonSocial}} </td>
+                  </ng-container>
+              
+                  <!-- Name Column -->
+                  <ng-container matColumnDef="ubicacion">
+                    <th mat-header-cell *matHeaderCellDef> Ubicacion </th>
+                    <td mat-cell *matCellDef="let element"> {{element.ubigeo.descDep+'-'
+                                                              +element.ubigeo.descProv+'-'
+                                                              +element.ubigeo.descDist}} </td>
+                  </ng-container>
+  
+                  <ng-container matColumnDef="direccion">
+                    <th mat-header-cell *matHeaderCellDef> Direccion </th>
+                    <td mat-cell *matCellDef="let element"> {{element.direccionCampus}} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="telefono">
+                    <th mat-header-cell *matHeaderCellDef> Telefono/Celular </th>
+                    <td mat-cell *matCellDef="let element"> {{element.telefono}} </td>
+                  </ng-container>
+
+  
+                  <ng-container matColumnDef="edit">
+                    <th mat-header-cell *matHeaderCellDef> Editar </th>
+                    <td mat-cell *matCellDef="let element"> 
+                      <button mat-mini-fab color="primary" (click)="edit(element.campusId)">
+                        <mat-icon>edit</mat-icon>
+                      </button>
+                    </td>
+                  </ng-container>
+  
+                  <ng-container matColumnDef="delete">
+                    <th mat-header-cell *matHeaderCellDef> Eliminar </th>
+                    <td mat-cell *matCellDef="let element">
+                      <button mat-mini-fab color="warn" (click)="delete(element.campusId)">
+                        <mat-icon>delete</mat-icon>
+                      </button>
+                    </td>
+                  </ng-container>
+              
+                  <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky:true"></tr>
+                  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                </table>
+    <!--        
+                <mat-paginator [pageSizeOptions]="[5, 10, 20]"
+                               showFirstLastButtons 
+                               aria-label="Select page of periodic elements">
+                </mat-paginator>
+              -->   
+             </div> 
+        </mat-card-content>
+    </mat-card>
+</div>

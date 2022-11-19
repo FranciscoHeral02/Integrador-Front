@@ -7,13 +7,15 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { ApplicantListadoComponent } from './applicant-listado/applicant-listado.component';
 import { ApplicantNuevoComponent } from './applicant-nuevo/applicant-nuevo.component';
 import { ApplicantService } from './services/applicant.service';
+import { ApplicantInterviewComponent } from './applicant-interview/applicant-interview.component';
 
 
 @NgModule({
   declarations: [
     ApplicantComponent,
     ApplicantListadoComponent,
-    ApplicantNuevoComponent
+    ApplicantNuevoComponent,
+    ApplicantInterviewComponent
   ],
   imports: [
     CommonModule,
